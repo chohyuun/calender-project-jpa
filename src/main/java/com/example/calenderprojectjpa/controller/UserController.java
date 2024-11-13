@@ -21,7 +21,8 @@ public class UserController {
     public ResponseEntity<UserResponseDto> signUp(@RequestBody UserRequestDto requestDto) {
        UserResponseDto userResponseDto = userService.signUp(
                requestDto.getName(),
-               requestDto.getEmail()
+               requestDto.getEmail(),
+               requestDto.getPassword()
        );
        return new ResponseEntity<>(userResponseDto, HttpStatus.CREATED);
     }
