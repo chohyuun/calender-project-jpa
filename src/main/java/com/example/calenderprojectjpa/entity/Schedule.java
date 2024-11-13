@@ -12,16 +12,16 @@ public class Schedule extends BaseEntity {
     private Long id;
 
     @Column(nullable = false)
-    private String username;
-
-    @Column(nullable = false)
     private String title;
 
     @Column(columnDefinition = "longtext")
     private String contents;
 
-    public Schedule(String username, String title, String contents) {
-        this.username = username;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public Schedule(String title, String contents) {
         this.title = title;
         this.contents = contents;
     }
@@ -31,9 +31,12 @@ public class Schedule extends BaseEntity {
     }
 
     // update schedule data
-    public void update(String username, String title, String contents) {
-        this.username = username == null ? this.username : username;
+    public void update(String title, String contents) {
         this.title = title == null ? this.title : title;
         this.contents = contents == null ? this.contents : contents;
+    }
+
+    public void setUserId(User user) {
+        this.id = user.getId();
     }
 }

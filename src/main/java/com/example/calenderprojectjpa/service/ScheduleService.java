@@ -14,11 +14,11 @@ import java.util.List;
 public class ScheduleService {
     private ScheduleRepository scheduleRepository;
 
-    public ScheduleResponseDto createSchedule(String username, String title, String contents) {
-        Schedule schedule = new Schedule(username, title, contents);
+    public ScheduleResponseDto createSchedule(String title, String contents) {
+        Schedule schedule = new Schedule(title, contents);
         scheduleRepository.save(schedule);
 
-        return new ScheduleResponseDto(schedule.getId(), schedule.getUsername(), schedule.getTitle(), schedule.getContents(), schedule.getCreatedDate(), schedule.getModifiedDate());
+        return new ScheduleResponseDto(schedule.getId(), schedule.getTitle(), schedule.getContents(), schedule.getCreatedDate(), schedule.getModifiedDate());
     }
 
     public List<ScheduleResponseDto> getAllSchedules() {
@@ -27,13 +27,13 @@ public class ScheduleService {
 
     public ScheduleResponseDto getSchedule(Long id) {
         Schedule schedule = scheduleRepository.findByIdOrElseThrow(id);
-        return new ScheduleResponseDto(schedule.getId(), schedule.getUsername(), schedule.getTitle(), schedule.getContents(), schedule.getCreatedDate(), schedule.getModifiedDate());
+        return new ScheduleResponseDto(schedule.getId(), schedule.getTitle(), schedule.getContents(), schedule.getCreatedDate(), schedule.getModifiedDate());
     }
 
     @Transactional
-    public void updateSchedule(Long id, String username, String title, String contents) {
+    public void updateSchedule(Long id, String title, String contents) {
         Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
-        findSchedule.update(username, title, contents);
+        findSchedule.update(title, contents);
     }
 
     public void deleteSchedule(Long id) {
