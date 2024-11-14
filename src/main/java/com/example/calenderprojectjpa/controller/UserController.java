@@ -1,8 +1,8 @@
 package com.example.calenderprojectjpa.controller;
 
+import com.example.calenderprojectjpa.dto.UserLoginRequestDto;
 import com.example.calenderprojectjpa.dto.UserRequestDto;
 import com.example.calenderprojectjpa.dto.UserResponseDto;
-import com.example.calenderprojectjpa.entity.User;
 import com.example.calenderprojectjpa.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -39,6 +39,12 @@ public class UserController {
     public ResponseEntity<Void> deleteUserById(@PathVariable("id") Long id) {
         userService.delete(id);
 
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<Void> login(@RequestBody UserLoginRequestDto requestDto) {
+        userService.login(requestDto.getEmail(), requestDto.getPassword());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
