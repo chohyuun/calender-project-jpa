@@ -19,7 +19,7 @@ public class ScheduleController {
     // 일정 신규 등록
     @PostMapping
     public ResponseEntity<ScheduleResponseDto> createSchedule(@RequestBody ScheduleRequestDto requestDto) {
-        ScheduleResponseDto scheduleResponseDto = scheduleService.createSchedule(requestDto.getTitle(), requestDto.getContents());
+        ScheduleResponseDto scheduleResponseDto = scheduleService.createSchedule(requestDto.getTitle(), requestDto.getContents(), requestDto.getUserId());
 
         return new ResponseEntity<>(scheduleResponseDto, HttpStatus.CREATED);
     }
@@ -27,8 +27,8 @@ public class ScheduleController {
     // 다 건 조회
     @GetMapping
     public ResponseEntity<List<ScheduleResponseDto>> getAllSchedules() {
-        List<ScheduleResponseDto> scheduleResponseDtos = scheduleService.getAllSchedules();
-        return new ResponseEntity<>(scheduleResponseDtos, HttpStatus.OK);
+        List<ScheduleResponseDto> scheduleResponseDto = scheduleService.getAllSchedules();
+        return new ResponseEntity<>(scheduleResponseDto, HttpStatus.OK);
     }
 
     // 단 건 조회

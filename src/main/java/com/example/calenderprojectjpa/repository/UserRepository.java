@@ -2,7 +2,6 @@ package com.example.calenderprojectjpa.repository;
 
 import com.example.calenderprojectjpa.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 

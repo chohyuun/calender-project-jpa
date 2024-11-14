@@ -2,6 +2,7 @@ package com.example.calenderprojectjpa.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Entity
@@ -18,16 +19,17 @@ public class Schedule extends BaseEntity {
     private String contents;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
+    @Setter
     private User user;
 
-    public Schedule(String title, String contents) {
+    public Schedule(String title, String contents, User user) {
         this.title = title;
         this.contents = contents;
+        this.setUserId(user);
     }
 
     public Schedule() {
-
     }
 
     // update schedule data
@@ -37,6 +39,6 @@ public class Schedule extends BaseEntity {
     }
 
     public void setUserId(User user) {
-        this.id = user.getId();
+        this.setUser(user);
     }
 }
