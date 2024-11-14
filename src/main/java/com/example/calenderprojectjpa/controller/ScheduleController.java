@@ -6,6 +6,7 @@ import com.example.calenderprojectjpa.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class ScheduleController {
 
     // 일정 신규 등록
     @PostMapping
-    public ResponseEntity<ScheduleResponseDto> createSchedule(@RequestBody ScheduleRequestDto requestDto) {
+    public ResponseEntity<ScheduleResponseDto> createSchedule(@Validated @RequestBody ScheduleRequestDto requestDto) {
         ScheduleResponseDto scheduleResponseDto = scheduleService.createSchedule(requestDto.getTitle(), requestDto.getContents(), requestDto.getUserId());
 
         return new ResponseEntity<>(scheduleResponseDto, HttpStatus.CREATED);
@@ -43,7 +44,7 @@ public class ScheduleController {
     @PatchMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> updateSchedule(
             @PathVariable Long id,
-            @RequestBody ScheduleRequestDto requestDto
+            @Validated @RequestBody ScheduleRequestDto requestDto
     ) {
         scheduleService.updateSchedule(id, requestDto.getTitle(), requestDto.getContents());
         return new ResponseEntity<>(scheduleService.getSchedule(id), HttpStatus.OK);

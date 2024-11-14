@@ -7,6 +7,7 @@ import com.example.calenderprojectjpa.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,13 +19,13 @@ public class UserController {
 
     // create user
     @PostMapping("/signup")
-    public ResponseEntity<UserResponseDto> signUp(@RequestBody UserRequestDto requestDto) {
-       UserResponseDto userResponseDto = userService.signUp(
-               requestDto.getName(),
-               requestDto.getEmail(),
-               requestDto.getPassword()
-       );
-       return new ResponseEntity<>(userResponseDto, HttpStatus.CREATED);
+    public ResponseEntity<UserResponseDto> signUp(@Validated @RequestBody UserRequestDto requestDto) {
+        UserResponseDto userResponseDto = userService.signUp(
+                requestDto.getName(),
+                requestDto.getEmail(),
+                requestDto.getPassword()
+        );
+        return new ResponseEntity<>(userResponseDto, HttpStatus.CREATED);
     }
 
     // get user data

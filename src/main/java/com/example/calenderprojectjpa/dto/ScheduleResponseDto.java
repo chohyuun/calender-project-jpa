@@ -1,13 +1,12 @@
 package com.example.calenderprojectjpa.dto;
 
 import com.example.calenderprojectjpa.entity.Schedule;
-import com.example.calenderprojectjpa.entity.User;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class ScheduleResponseDto  {
+public class ScheduleResponseDto {
     private Long id;
     private Long userId;
     private String title;
