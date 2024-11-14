@@ -1,5 +1,6 @@
 package com.example.calenderprojectjpa.dto;
 
+import com.example.calenderprojectjpa.entity.User;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -18,5 +19,9 @@ public class UserResponseDto {
         this.email = email;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
+    }
+
+    public static UserResponseDto toDto(User user) {
+        return new UserResponseDto(user.getId(), user.getName(), user.getEmail(), user.getCreatedDate(), user.getModifiedDate());
     }
 }

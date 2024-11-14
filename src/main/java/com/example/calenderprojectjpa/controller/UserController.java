@@ -1,5 +1,6 @@
 package com.example.calenderprojectjpa.controller;
 
+import com.example.calenderprojectjpa.config.PasswordEncoder;
 import com.example.calenderprojectjpa.dto.UserLoginRequestDto;
 import com.example.calenderprojectjpa.dto.UserRequestDto;
 import com.example.calenderprojectjpa.dto.UserResponseDto;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -26,6 +29,13 @@ public class UserController {
                 requestDto.getPassword()
         );
         return new ResponseEntity<>(userResponseDto, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserResponseDto>> getAllUsers() {
+        List<UserResponseDto> userResponseDtoList = userService.getAllUsers();
+
+        return new ResponseEntity<>(userResponseDtoList, HttpStatus.OK);
     }
 
     // get user data
