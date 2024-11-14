@@ -19,6 +19,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     // create user
     @PostMapping("/signup")
@@ -26,7 +27,7 @@ public class UserController {
         UserResponseDto userResponseDto = userService.signUp(
                 requestDto.getName(),
                 requestDto.getEmail(),
-                requestDto.getPassword()
+                passwordEncoder.encode(requestDto.getPassword())
         );
         return new ResponseEntity<>(userResponseDto, HttpStatus.CREATED);
     }

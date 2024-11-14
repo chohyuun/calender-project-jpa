@@ -1,5 +1,6 @@
 package com.example.calenderprojectjpa.service;
 
+import com.example.calenderprojectjpa.config.PasswordEncoder;
 import com.example.calenderprojectjpa.dto.UserResponseDto;
 import com.example.calenderprojectjpa.entity.User;
 import com.example.calenderprojectjpa.repository.UserRepository;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public UserResponseDto signUp(String name, String email, String password) {
         User user = new User(name, email, password);
@@ -35,7 +37,7 @@ public class UserService {
     public void login(String email, String password) {
         User user = userRepository.findByEmail(email);
 
-        if(!user.getPassword().equals(password)) {
+        if(!passwordEncoder.matches(password, user.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Incorrect password");
         }
     }
