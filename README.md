@@ -16,14 +16,13 @@
 
 ### /schedules
 
-| 기능        | http method | endpoint        | request  | response  | 상태 코드      |
-|-----------|-------------|-----------------|----------|-----------|------------|
-| 일정 추가     | POST        | /schedules      | 요청 body  | 등록 정보     | 201: 정상 등록 |
-| 전체 일정 조회  | GET         | /schedules      | 요청 param | 다건 응답 정보  | 200: 정상 조회 |
-| 단 건 일정 조회 | GET         | /schedules/{id} | 요청 param | 단 건 응답 정보 | 200: 정상 조회 |
-| 일정 수정     | PATCH       | /schedules/{id} | 요청 body  | 수정 정보     | 200: 정상 수정 |
-| 일정 삭제     | DELETE      | /schedules/{id} | 요청 param | X         | 200: 정상 삭제 |
-
+| 기능 | http method | endpoint | request | response | 상태 코드 |
+| --- | --- | --- | --- | --- | --- |
+| 일정 추가 | POST | /schedules | 요청 body | 등록 정보 | 201: 정상 등록 |
+| 전체 일정 조회 | GET | /schedules | 요청 param | 다건 응답 정보 | 200: 정상 조회 |
+| 단 건 일정 조회 | GET | /schedules/{id} | 요청 param | 단 건 응답 정보 | 200: 정상 조회 |
+| 일정 수정 | PATCH | /schedules/{id} | 요청 body | 수정 정보 | 200: 정상 수정 |
+| 일정 삭제 | DELETE | /schedules/{id} | 요청 param | X | 200: 정상 삭제 |
 - 일정 추가
     - endpoint : /schedules
     - http method : POST
@@ -33,7 +32,7 @@
         {
         	"username" : "hyunji cho",
         	"title" : "할 일 추가",
-        	"contents" : "내용"
+        	"contents" : "내용",
         }
         ```
 
@@ -112,7 +111,7 @@
         {
         	"username" : "hyunji cho",
         	"title" : "할 일 추가",
-        	"contents" : "내용"
+        	"contents" : "내용",
         }
         ```
 
@@ -121,7 +120,7 @@
         // username은 작성자 정보에서 받아온 값으로 저장
         {
         	"title" : "할 일 추가",
-        	"contents" : "내용"
+        	"contents" : "내용",
         }
         ```
 
@@ -167,15 +166,16 @@
         }
         ```
 
+
 ### /users
 
-| 기능    | http method | endpoint      | request  | response body | 상태코드        |
-|-------|-------------|---------------|----------|---------------|-------------|
-| 회원가입  | POST        | /users/signup | 요청 body  | 등록 정보         | 201: 정상 등록  |
-| 유저 조회 | GET         | /users/{id}   | 요청 param | 단 건 응답 정보     | 200: 정상 조회  |
-| 유저 삭제 | DELETE      | /users/{id}   | 요청 param | X             | 200: 정상 삭제  |
-| 로그인   | GET         | /users/login  | 요청 body  | X             | 200: 로그인 성공 |
-
+| 기능 | http method | endpoint | request  | response body | 상태코드 |
+| --- | --- | --- | --- | --- | --- |
+| 회원가입 | POST | /users/signup | 요청 body | 등록 정보 | 201: 정상 등록 |
+| 유저 전체 조회 | GET | /users | 요청 param | 다 건 응답 정보 | 200: 정상 조회 |
+| 유저 조회 | GET | /users/{id} | 요청 param | 단 건 응답 정보 | 200: 정상 조회 |
+| 유저 삭제 | DELETE | /users/{id} | 요청 param | X | 200: 정상 삭제 |
+| 로그인 | GET | /users/login | 요청 body | X | 200: 로그인 성공 |
 - 회원가입
     - endpoint : /users/signup
     - http method : POST
@@ -204,6 +204,28 @@
         400: bad request
         {
         	"message" : "request check"
+        }
+        ```
+
+- 전체 유저 조회
+    - endpoint : /users
+    - http method : GET
+    - request : none
+    - response
+
+        ```json
+        200: create
+        [{
+        	"id" : 1,	
+        	"username" : "hyunji cho",
+        	"email" : "ooo@oooo.com",
+        	"createDate" : "2024-11-13 00:00:00",
+        	"modifiedDate" : "2024-11-13 00:00:00"
+        }, ...]
+        
+        404: not found
+        {
+        	"message" : "user not found"
         }
         ```
 
