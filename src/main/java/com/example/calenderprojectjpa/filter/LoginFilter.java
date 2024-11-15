@@ -2,7 +2,6 @@ package com.example.calenderprojectjpa.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.PatternMatchUtils;
@@ -21,8 +20,6 @@ public class LoginFilter implements Filter {
     ) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         String requestURI = req.getRequestURI();
-
-        HttpServletResponse resp = (HttpServletResponse) response;
 
         if(!isWhiteList(requestURI)) {
             HttpSession session = req.getSession();
