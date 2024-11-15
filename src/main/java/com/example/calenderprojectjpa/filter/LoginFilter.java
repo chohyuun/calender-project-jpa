@@ -24,7 +24,7 @@ public class LoginFilter implements Filter {
         if(!isWhiteList(requestURI)) {
             HttpSession session = req.getSession();
 
-            if(session == null || session.getAttribute("sessionKey값") == null) {
+            if(session == null || session.getAttribute("user") == null) {
                 throw new RuntimeException("please login first");
             }
         }

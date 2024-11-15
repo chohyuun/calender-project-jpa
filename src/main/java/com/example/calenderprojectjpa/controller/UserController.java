@@ -5,6 +5,7 @@ import com.example.calenderprojectjpa.dto.UserLoginRequestDto;
 import com.example.calenderprojectjpa.dto.UserRequestDto;
 import com.example.calenderprojectjpa.dto.UserResponseDto;
 import com.example.calenderprojectjpa.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -80,8 +81,9 @@ public class UserController {
      * @return none
      */
     @GetMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody UserLoginRequestDto requestDto) {
+    public ResponseEntity<Void> login(@RequestBody UserLoginRequestDto requestDto, HttpSession httpSession) {
         userService.login(requestDto.getEmail(), requestDto.getPassword());
+        httpSession.setAttribute("user", requestDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
